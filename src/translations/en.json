@@ -1,0 +1,90 @@
+{
+  "homeHeader": {
+    "speciality": "specialist",
+    "findSpeciality": "Find specialist",
+    "baseMedi": "Mediacal facility",
+    "doctor": "Doctor",
+    "findHos": "Select clinic hospital",
+    "findDoc": "Choose good doctor",
+    "package": "Package",
+    "totalDos": "General Health Checkup",
+    "support": "Support",
+    "baseMedial": "MEDICAL FOUNDATION",
+    "totalCare": "Comprehensive HEALTH CARE",
+    "findSpeholder": "Find a specialty",
+    "examSpe": "Specialist examination",
+    "remoteExam": "Remote examination",
+    "totalExam": "General Examination",
+    "medicalTest": "Medical test",
+    "spiritHealth": "Spirit health",
+    "dentistExam": "Dental Examination"
+  },
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "decentralize": "Decentralize",
+    "close": "Close",
+    "save": "Save",
+    "refresh": "Refresh",
+    "accept": "Accept",
+    "confirm": "Confirm",
+    "confirm-this-task": "Are you sure to process this task?",
+    "fail-to-load-data": "Fail to load data",
+    "unknown-error": "There was an error",
+    "internal-server-error": "Internal server error",
+    "bad-request": "Bad request",
+    "forbiden-request": "Invalid input data",
+    "fail-to-load-all-code": "Fail to load data from allcode",
+    "sum": "Sum",
+    "date-range-invalid": "Date range invalid",
+    "welcome": "Welcome",
+    "hidden": "Hidden",
+    "seeMore": "See more"
+  },
+  "menu": {
+    "system": {
+      "header": "Users",
+      "system-administrator": {
+        "header": "System Administrator",
+        "user-manage": "User manage",
+        "product-manage": "User manage with Redux",
+        "register-package-group-or-account": "Register service package for group/account",
+        "manage-doctor": "Manage doctor",
+        "manage-admin": "Manage admin",
+        "crud-user": "CRUD-User",
+        "crud-redux": "CRUD-Redux",
+        "manage-clinic": "Manage clinic",
+        "manage-special": "Manage special",
+        "manage-handbook": "Manage handbook"
+      },
+      "headerTwo": "Clinic",
+      "headerThree": "Specialty",
+      "headerFour": "Handbook",
+      "system-parameter": {
+        "header": "System-parameter"
+      }
+    },
+    "doctor": {
+      "manage-schedule": "Manage doctor's schedule",
+      "manage-patiendt": "Manage patient"
+    }
+  },
+  "user": {
+    "email": "Email",
+    "password": "password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "address": "address",
+    "phoneNumber": "Phone number",
+    "gender": "Gender",
+    "position": "position",
+    "role": "Role",
+    "image": "Avatar",
+    "addressExam": "Address exam",
+    "priceExam": "Price"
+  },
+  "manage-schedule": {
+    "title": "Manage Doctor's schedule"
+  }
+}

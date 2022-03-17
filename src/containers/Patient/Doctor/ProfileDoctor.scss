@@ -1,0 +1,19 @@
+.intro-doctor {
+  display: flex;
+  align-items: center;
+  gap: 3em;
+  padding: 0 3em;
+}
+.content-left {
+  width: 9rem;
+  height: 8em;
+  background-size: cover;
+  border-radius: 4em;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.content-boundary {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}

@@ -1,0 +1,28 @@
+.boundary {
+  background: #f7f7f7;
+  .intro-specialty {
+    padding: 1em;
+    .title-spe {
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+  .select-province {
+    padding: 1em;
+    background-color: white;
+  }
+  .detail-container {
+    display: flex;
+    border: solid 1px grey;
+    background-color: white;
+    border-radius: 6px;
+    .detail-first-child {
+      width: 50%;
+      display: flex;
+    }
+    .detail-child {
+      border-left: solid 1px grey;
+      padding: 1em;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.img-customize-guilde {
+  display: flex !important;
+  gap: 1em;
+  font-weight: 600;
+  .bg-image {
+    padding-bottom: 5px;
+    width: 348px;
+    height: 150px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #eee;
+  }
+  .bg-image-guilde {
+    background: url("../../../assets/images/115122-cham-soc-sau-phau-thuat-ap-xe-hau-mon.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  div:nth-child(2) {
+    max-width: 20em;
+    font-size: 16px;
+  }
+}

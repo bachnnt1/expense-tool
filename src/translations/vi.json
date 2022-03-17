@@ -1,0 +1,90 @@
+{
+  "homeHeader": {
+    "speciality": "Chuyên khoa",
+    "findSpeciality": "Tìm bác sĩ theo chuyên khoa",
+    "baseMedi": "Cơ sở y tế",
+    "findHos": "Chọn bệnh viện phòng khám",
+    "doctor": "Bác sĩ",
+    "findDoc": "Chọn bác sĩ giỏi",
+    "package": "Gói khám",
+    "totalDos": "Khám sức khỏe tổng quát",
+    "support": "Hỗ trợ",
+    "baseMedial": "NỀN TẢNG Y TẾ",
+    "totalCare": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+    "findSpeholder": "Tìm chuyên khoa",
+    "examSpe": "Khám chuyên khoa",
+    "remoteExam": "Khám từ xa",
+    "totalExam": "Khám tổng quát",
+    "medicalTest": "Xét nghiệm y học",
+    "spiritHealth": "Sức khỏe tinh thần",
+    "dentistExam": "Khám nha khoa"
+  },
+  "common": {
+    "add": "Thêm",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "decentralize": "Phân quyền",
+    "close": "Đóng",
+    "save": "Lưu",
+    "refresh": "Refresh",
+    "accept": "Đồng ý",
+    "confirm": "Xác nhận",
+    "confirm-this-task": "Bạn có chắc chắn thực hiện tác vụ này?",
+    "fail-to-load-data": "Không thể tải về dữ liệu",
+    "unknown-error": "Có lỗi xảy ra",
+    "internal-server-error": "Lỗi kết nối",
+    "bad-request": "Yêu cầu không hợp lệ",
+    "forbiden-request": "Thông tin truyền vào không hợp lệ",
+    "fail-to-load-all-code": "Không thể tải về dữ liệu allcode",
+    "sum": "Tổng",
+    "date-range-invalid": "Khoảng thời gian không hợp lệ",
+    "welcome": "Xin chào",
+    "hidden": "Ẩn",
+    "seeMore": "Xem thêm"
+  },
+  "menu": {
+    "system": {
+      "header": "Người dùng",
+      "system-administrator": {
+        "header": "Quản trị hệ thống",
+        "user-manage": "Quản lý người sử dụng",
+        "product-manage": "Quản lý user dùng Redux",
+        "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản",
+        "manage-doctor": "Quản lý bác sĩ",
+        "manage-admin": "Quản lý admin",
+        "crud-user": "CRUD-User",
+        "crud-redux": "CRUD-Redux",
+        "manage-clinic": "Quản lý phòng khám",
+        "manage-special": "Quản lý Chuyên khoa",
+        "manage-handbook": "Quản lý cẩm nang"
+      },
+      "headerTwo": "Phòng khám",
+      "headerThree": "Chuyên khoa",
+      "headerFour": "Cẩm nang",
+      "system-parameter": {
+        "header": "Tham số hệ thống"
+      }
+    },
+    "doctor": {
+      "manage-schedule": "Quản lý kế hoạch khám bệnh",
+      "manage-patiendt": "Quản lý bệnh nhân"
+    }
+  },
+  "user": {
+    "email": "Địa chỉ email",
+    "password": "mật khẩu",
+    "firstName": "Họ",
+    "lastName": "Tên",
+    "address": "Địa chỉ",
+    "phoneNumber": "Số điện thoại",
+    "gender": "Giới tính",
+    "position": "Vị trí",
+    "role": "chức vụ",
+    "image": "Ảnh đại diện",
+    "addressExam": "Địa chỉ khám",
+    "priceExam": "Giá khám"
+  },
+  "manage-schedule": {
+    "title": "Quản lý lịch trình khám bệnh của bác sĩ"
+  }
+}

@@ -1,0 +1,15 @@
+.input-boundary {
+  display: flex;
+  padding: 1em 0;
+  .col-6 {
+    display: flex;
+    flex-direction: column;
+  }
+  input {
+    width: 50%;
+  }
+}
+.button {
+  text-align: center;
+  padding-top: 1em;
+}

@@ -1,0 +1,29 @@
+.doctor-detail-container {
+  width: 100%;
+  height: 36rem;
+  padding: 2em 10em;
+  .intro-doctor {
+    display: flex;
+    align-items: center;
+    gap: 3em;
+    padding-bottom: 2em;
+  }
+  .content-left {
+    width: 9rem;
+    height: 8em;
+    background-size: cover;
+    border-radius: 4em;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .content-right {
+    max-width: 25rem;
+  }
+  .schedule-doctor {
+    display: flex;
+    .content-left {
+      width: 40%;
+      border-radius: 0;
+    }
+  }
+}

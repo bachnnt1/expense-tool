@@ -1,0 +1,33 @@
+.input-container {
+  display: flex;
+  justify-content: center;
+  gap: 5em;
+  padding-top: 1em;
+  align-items: center;
+  .input {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+  }
+}
+.detail {
+  padding-top: 2em;
+  display: flex;
+  justify-content: center;
+  .range-time {
+    display: flex;
+    gap: 1em;
+    button {
+      border: none;
+      padding: 0.6rem;
+      border-radius: 8px;
+    }
+    .active {
+      background: aquamarine;
+    }
+  }
+}
+.submit-button {
+  text-align: center;
+  padding-top: 1em;
+}
