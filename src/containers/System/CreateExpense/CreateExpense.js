@@ -33,8 +33,8 @@ class CreateExpense extends Component {
     };
   }
 
-  async componentDidMount() {}
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  async componentDidMount() { }
+  componentDidUpdate(prevProps, prevState, snapshot) { }
   onChangeInput = (event, id) => {
     let copyState = { ...this.state };
     copyState[id] = event.target.value;
@@ -86,7 +86,7 @@ class CreateExpense extends Component {
           </div>
           <div>
             <div className="result-create">
-              <label className="label-radio">Organization</label>
+              <label>Organization</label>
               <div className="radio-input">
                 <div>
                   <input id="aav" name="org" type="radio" value="aav" />
@@ -165,7 +165,7 @@ class CreateExpense extends Component {
                       this.onChangeInput(event, "selectedDepartment")
                     }
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       Select department
                     </option>
                     {listOptionDepartment &&
@@ -188,7 +188,7 @@ class CreateExpense extends Component {
                       this.onChangeInput(event, "selectedAdvandeReq")
                     }
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       Select float
                     </option>
                     {listOptionAdvance &&
@@ -242,7 +242,7 @@ class CreateExpense extends Component {
                         this.onChangeInput(event, "selectedPayMethod")
                       }
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled>
                         Select Pay to
                       </option>
                       {listOptionPayMethod &&
@@ -337,7 +337,10 @@ class CreateExpense extends Component {
           </div>
         </div>
         <div className="footer">
-          {/* TO DO */}
+          <div className="button-function">
+            <button type="button" className="secondary-button">Cancel</button>
+            <button type="button" className="primary-button">Create</button>
+          </div>
         </div>
       </>
     );
