@@ -1,13 +1,12 @@
 import { ConnectedRouter as Router } from "connected-react-router";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import ConfirmModal from "../components/ConfirmModal";
 import { history } from "../redux";
 import { path } from "../utils";
 import CreateExpense from "./System/CreateExpense/CreateExpense";
 import ListExpense from "./System/ListExpense/ListExpense";
-
 
 class App extends Component {
   handlePersistorState = () => {
@@ -36,8 +35,18 @@ class App extends Component {
             <ConfirmModal />
             <div className="content-container">
               <Switch>
-                <Route path={path.LIST_VIEW} component={ListExpense} />
-                <Route path={path.CREATE_NEW_EXPENSE} component={CreateExpense} />
+                <Route path={path.LIST_VIEW} exact component={ListExpense} />
+                <Route
+                  exact
+                  path={path.HOME}
+                  render={() => {
+                    return <Redirect to={path.LIST_VIEW} />;
+                  }}
+                />
+                <Route
+                  path={path.CREATE_NEW_EXPENSE}
+                  component={CreateExpense}
+                />
               </Switch>
             </div>
           </div>
