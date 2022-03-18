@@ -10,24 +10,24 @@
       font-weight: 600;
     }
   }
-  select,
-  input {
-    width: 100%;
-    border-radius: 5px;
-    height: 2.2em;
-    border: solid 1px #d0caca;
-    cursor: pointer;
-    outline: none;
-  }
-  select:required:invalid {
-    color: gray;
-  }
-  option[value=""][disabled] {
-    display: none;
-  }
   .lnndaO {
     white-space: break-spaces !important;
   }
+}
+select,
+input {
+  width: 100%;
+  border-radius: 5px;
+  height: 2.2em;
+  border: solid 1px #d0caca;
+  cursor: pointer;
+  outline: none;
+}
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
 }
 .primary-button {
   background: red;
@@ -81,4 +81,24 @@
 
 .rdt_Pagination {
   gap: 1em;
+}
+
+.modal .modal-dialog .modal-content .modal-header {
+  background: white;
+  color: black;
+  padding: 2em 1em;
+  .modal-title {
+    font-weight: 600;
+  }
+  .close {
+    border: none;
+    background: white;
+    span {
+      font-size: 25px;
+      color: grey;
+    }
+  }
+}
+.modal-sm {
+  max-width: 45em;
 }

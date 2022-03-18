@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./CreateExpense.scss";
 import DetailExpense from "../ExpenseDetail/DetailExpense";
+import ModalExpense from "../ExpenseDetail/ModalExpense";
 class CreateExpense extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,7 @@ class CreateExpense extends Component {
       listOptionAdvance: [],
       selectedAdvandeReq: "",
       claimAmount: 0,
+      paymentMethod: '',
       selectedCurrency: "VND",
       listOptionCurrency: [
         { label: "VND", value: "VND" },
@@ -24,12 +26,18 @@ class CreateExpense extends Component {
       ],
       expenseContent: "",
       selectedPayMethod: "",
-      listOptionPayMethod: [],
+      listOptionPayMethod: [{
+        label: "AAV", value: "aav"
+      },
+      { label: "Claimant", value: "claimant" },
+      ],
       isTransfer: true,
       accountNo: "",
       bank: "",
       amount: "",
       selectedFile: null,
+      isDisplayPaymentMethod: false,
+      isDisplayAmount: false,
     };
   }
 
@@ -57,6 +65,9 @@ class CreateExpense extends Component {
     // Update the state
     this.setState({ selectedFile: event.target.files[0] });
   };
+  onChangeRadioButton = (event) => {
+    this.setState({ paymentMethod: event.target.value });
+  }
   render() {
     let {
       selectedCategory,
@@ -73,11 +84,17 @@ class CreateExpense extends Component {
       expenseContent,
       selectedPayMethod,
       listOptionPayMethod,
-      isTransfer,
+      isDisplayBankAndAccount,
+      isDisplayAmount,
       accountNo,
       bank,
       amount,
+      isDisplayPaymentMethod,
+      paymentMethod
     } = this.state;
+    isDisplayPaymentMethod = (selectedPayMethod === 'claimant') ? false : true;
+    isDisplayBankAndAccount = ((selectedPayMethod === 'aav' && paymentMethod === 'transfer') || (selectedPayMethod === 'claimant')) ? true : false;
+    isDisplayAmount = (selectedPayMethod === 'aav' && paymentMethod === 'cash') ? true : false;
     return (
       <>
         <div className="main-container container">
@@ -114,8 +131,8 @@ class CreateExpense extends Component {
                       listOptionCategory.length &&
                       listOptionCategory.map((item, index) => {
                         return (
-                          <option key={index} value={item.label}>
-                            {item.value}
+                          <option key={index} value={item.value}>
+                            {item.label}
                           </option>
                         );
                       })}
@@ -147,8 +164,8 @@ class CreateExpense extends Component {
                       listOptionClaimant.length &&
                       listOptionClaimant.map((item, index) => {
                         return (
-                          <option key={index} value={item.label}>
-                            {item.value}
+                          <option key={index} value={item.value}>
+                            {item.label}
                           </option>
                         );
                       })}
@@ -172,8 +189,8 @@ class CreateExpense extends Component {
                       listOptionDepartment.length &&
                       listOptionDepartment.map((item, index) => {
                         return (
-                          <option key={index} value={item.label}>
-                            {item.value}
+                          <option key={index} value={item.value}>
+                            {item.label}
                           </option>
                         );
                       })}
@@ -195,8 +212,8 @@ class CreateExpense extends Component {
                       listOptionAdvance.length &&
                       listOptionAdvance.map((item, index) => {
                         return (
-                          <option key={index} value={item.label}>
-                            {item.value}
+                          <option key={index} value={item.value}>
+                            {item.label}
                           </option>
                         );
                       })}
@@ -225,8 +242,8 @@ class CreateExpense extends Component {
                           listOptionCurrency.length &&
                           listOptionCurrency.map((item, index) => {
                             return (
-                              <option key={index} value={item.label}>
-                                {item.value}
+                              <option key={index} value={item.value}>
+                                {item.label}
                               </option>
                             );
                           })}
@@ -249,8 +266,8 @@ class CreateExpense extends Component {
                         listOptionPayMethod.length &&
                         listOptionPayMethod.map((item, index) => {
                           return (
-                            <option key={index} value={item.label}>
-                              {item.value}
+                            <option key={index} value={item.value}>
+                              {item.label}
                             </option>
                           );
                         })}
@@ -267,23 +284,26 @@ class CreateExpense extends Component {
                   ></textarea>
                 </div>
               </div>
-              <label className="label-radio">Payment method</label>
-              <div className="radio-input">
-                <div>
-                  <input
-                    id="transfer"
-                    name="payMethod"
-                    type="radio"
-                    value="transfer"
-                  />
-                  <label htmlFor="transfer">Transfer</label>
-                </div>
-                <div>
-                  <input id="cash" name="payMethod" type="radio" value="cash" />
-                  <label htmlFor="cash">Cash</label>
-                </div>
-              </div>
-              {isTransfer ? (
+              {isDisplayPaymentMethod &&
+                <>
+                  <label className="label-radio">Payment method</label>
+                  <div className="radio-input" onChange={this.onChangeRadioButton}>
+                    <div>
+                      <input
+                        id="transfer"
+                        name="payMethod"
+                        type="radio"
+                        value="transfer"
+                      />
+                      <label htmlFor="transfer">Transfer</label>
+                    </div>
+                    <div>
+                      <input id="cash" name="payMethod" type="radio" value="cash" />
+                      <label htmlFor="cash">Cash</label>
+                    </div>
+                  </div></>}
+
+              {isDisplayBankAndAccount &&
                 <div className="input-row">
                   <div className="input-field">
                     <label>Bank</label>
@@ -304,7 +324,8 @@ class CreateExpense extends Component {
                     ></input>
                   </div>
                 </div>
-              ) : (
+              }
+              {isDisplayAmount &&
                 <div className="input-field">
                   <label>Amount</label>
                   <input
@@ -313,7 +334,8 @@ class CreateExpense extends Component {
                     onChange={(event) => this.onChangeInput(event, "amount")}
                   ></input>
                 </div>
-              )}
+              }
+
               {/* Expanse detail */}
               <div>
                 <DetailExpense />

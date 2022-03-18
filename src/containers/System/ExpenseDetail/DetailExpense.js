@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./DetailExpense.scss";
 import DataTable from "react-data-table-component";
+import ModalExpense from "./ModalExpense";
 const columns = [
   {
     name: "Invoice No",
@@ -64,27 +65,46 @@ const data = [
 class DetailExpense extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isOpenModal: false,
+    };
   }
 
-  async componentDidMount() {}
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  async componentDidMount() { }
+  componentDidUpdate(prevProps, prevState, snapshot) { }
   onChangeInput = (event, id) => {
     let copyState = { ...this.state };
     copyState[id] = event.target.value;
     this.setState({ ...copyState });
   };
-
+  handleAddNewExpense = () => {
+    this.setState({
+      isOpenModal: true,
+    });
+  };
+  handleAddNewExpenseDetail = (data) => {
+    console.log(data);
+  }
+  toogleUserModal = () => {
+    this.setState({
+      isOpenModal: !this.state.isOpenModal,
+    });
+  };
   render() {
     return (
       <>
         <div className="head">
           <label>Expense Detail </label>
-          <button className="primary-button">+ Add new</button>
+          <button className="primary-button" onClick={this.handleAddNewExpense}>+ Add new</button>
         </div>
         <div className="result">
           <DataTable columns={columns} data={data} pagination />
         </div>
+        <ModalExpense
+          isOpen={this.state.isOpenModal}
+          toogleFromParent={this.toogleUserModal}
+          handleAddNewExpense={this.handleAddNewExpenseDetail}
+        />
       </>
     );
   }
