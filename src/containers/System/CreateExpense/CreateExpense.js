@@ -10,12 +10,31 @@ class CreateExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedOrganization: '',
       currentDate: "",
-      selectedCategory: "Expense claim",
-      listOptionCategory: [{ label: "Expense claim", value: "Expense claim" }],
-      listOptionClaimant: [],
+      selectedCategory: "",
+      listOptionCategory: [{
+        label: 'Fund transfer request', value: 'Fund transfer request'
+      },
+      {
+        label: 'Expense claim', value: 'Expense claim'
+      }],
+      listOptionClaimant: [{
+        label: 'Nguyễn Thái Bảo', value: 'Nguyễn Thái Bảo'
+      },
+      {
+        label: 'Messi', value: 'Messi'
+      },
+      {
+        label: 'CR7', value: 'CR7'
+      }],
       selectedClaimant: "",
-      listOptionDepartment: [],
+      listOptionDepartment: [{
+        label: 'FPT', value: 'fpt'
+      },
+      {
+        label: 'Viettel', value: 'Viettel'
+      }],
       selectedDepartment: "",
       listOptionAdvance: [],
       selectedAdvandeReq: "",
@@ -90,14 +109,14 @@ class CreateExpense extends Component {
       department: this.state.selectedDepartment,
       organization: this.state.selectedOrganization,
       type: this.state.selectedCategory,
-      amountClaimed: this.state.claimAmount,
+      amount: this.state.claimAmount,
       status: 'Inprogress'
     };
     this.props.createExpenseClaimAction(newExpenseClaim);
     //  reset all
     this.setState({
       currentDate: "",
-      selectedCategory: "Expense claim",
+      selectedCategory: "",
       selectedClaimant: "",
       selectedDepartment: "",
       selectedAdvandeReq: "",
@@ -176,11 +195,15 @@ class CreateExpense extends Component {
                 <div className="input-field">
                   <label>Category</label>
                   <select
+                    required
                     value={selectedCategory}
                     onChange={(event) =>
                       this.onChangeInput(event, "selectedCategory")
                     }
                   >
+                    <option value="" disabled>
+                      Select category
+                    </option>
                     {listOptionCategory &&
                       listOptionCategory.length &&
                       listOptionCategory.map((item, index) => {
@@ -209,11 +232,15 @@ class CreateExpense extends Component {
                 <div className="input-field">
                   <label>Claimant</label>
                   <select
+                    required
                     value={selectedClaimant}
                     onChange={(event) =>
                       this.onChangeInput(event, "selectedClaimant")
                     }
                   >
+                    <option value="" disabled>
+                      Select claimant
+                    </option>
                     {listOptionClaimant &&
                       listOptionClaimant.length &&
                       listOptionClaimant.map((item, index) => {

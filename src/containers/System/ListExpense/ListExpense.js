@@ -73,45 +73,103 @@ const columns = [
     ],
   },
 ];
-
 class ListExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentDate: "",
-      listOptionClaimant: [],
-      listOptionDepartment: [],
-      listOptionType: [],
-      listOptionStatus: [],
+      listOptionClaimant: [{
+        label: 'Nguyễn Thái Bảo', value: 'Nguyễn Thái Bảo'
+      },
+      {
+        label: 'Messi', value: 'Messi'
+      },
+      {
+        label: 'CR7', value: 'CR7'
+      }],
+      listOptionDepartment: [{
+        label: 'FPT', value: 'fpt'
+      },
+      {
+        label: 'Viettel', value: 'Viettel'
+      }],
+      listOptionType: [{
+        label: 'Fund transfer request', value: 'Fund transfer request'
+      },
+      {
+        label: 'Expense claim', value: 'Expense claim'
+      }],
+      listOptionStatus: [{
+        label: 'Inprogress', value: 'Inprogress'
+      },
+      {
+        label: 'Done', value: 'Done'
+      }],
       selectedClaimant: "",
       selectedDepartment: "",
       selectedType: "",
       selectedStatus: "",
-      listExpenseClaim: []
+      listExpenseClaim: [],
+      listExpenseClaimView: [],
     };
   }
   componentDidMount() {
     this.props.getListExpenseClaimAction();
     this.setState({
-      listExpenseClaim: this.props.listExpenseClaim
+      listExpenseClaim: this.props.listExpenseClaim,
+      listExpenseClaimView: this.props.listExpenseClaim,
+      lstTemp: this.props.listExpenseClaim
     });
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.listExpenseClaim !== this.props.listExpenseClaim) {
       this.setState({
-        listExpenseClaim: this.props.listExpenseClaim
+        listExpenseClaim: this.props.listExpenseClaim,
+        listExpenseClaimView: this.props.listExpenseClaimView,
+        lstTemp: this.props.listExpenseClaim
       });
     }
   }
   handleOnChangeDate = (event) => {
     this.setState({
       currentDate: event.target.value,
+    }, () => {
+      let {
+        currentDate, listExpenseClaim
+      } = this.state;
+      let lstTemp = listExpenseClaim.filter(item => item.date === currentDate);
+      this.setState({
+        listExpenseClaimView: lstTemp
+      });
     });
   };
   onChangeInput = (event, id) => {
     let copyState = { ...this.state };
-    copyState[id] = event.target.value;
-    this.setState({ ...copyState });
+    copyState[id] = event;
+    this.setState({ ...copyState }, () => {
+      let {
+        selectedClaimant,
+        selectedDepartment,
+        selectedType,
+        selectedStatus,
+        lstTemp
+      } = this.state;
+      if (selectedClaimant) {
+        lstTemp = lstTemp.filter(item => selectedClaimant.value === item.claimant);
+      }
+      if (selectedDepartment) {
+        lstTemp = lstTemp.filter(item => selectedDepartment.value === item.department);
+      }
+      if (selectedType) {
+        lstTemp = lstTemp.filter(item => selectedType.value === item.type);
+      }
+      if (selectedStatus) {
+        lstTemp = lstTemp.filter(item => selectedStatus.value === item.status);
+      }
+      this.setState({
+        listExpenseClaimView: lstTemp
+      });
+    });
   };
   onFocus = (event) => {
     event.currentTarget.type = "date";
@@ -136,7 +194,7 @@ class ListExpense extends Component {
       selectedDepartment,
       selectedType,
       selectedStatus,
-      listExpenseClaim
+      listExpenseClaimView,
     } = this.state;
     return (
       <>
@@ -199,7 +257,7 @@ class ListExpense extends Component {
             </div>
           </div>
           <div className="result">
-            <DataTable columns={columns} data={listExpenseClaim} pagination />
+            <DataTable columns={columns} data={listExpenseClaimView} pagination />
           </div>
         </div>
       </>
