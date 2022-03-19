@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import "./DetailExpense.scss";
 import DataTable from "react-data-table-component";
 import ModalExpense from "./ModalExpense";
+import {
+  createEstimatedExpenseAction,
+} from "../../../store/actions/adminActions";
 const columns = [
   {
     name: "Invoice No",
@@ -47,19 +50,10 @@ const columns = [
   {
     name: "Actions",
     selector: (row) => row.action,
-  },
-];
-const data = [
-  {
-    invoiceNo: 1,
-    detailExpenses: "Beetlejuice",
-    supplier: "1988",
-    invoiceDate: "a",
-    fundingSource: "d",
-    projectCode: "c",
-    donor: "d",
-    amount: "e",
-    action: "g",
+    cell: () => <button>Delete</button>,
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
   },
 ];
 class DetailExpense extends Component {
@@ -67,11 +61,34 @@ class DetailExpense extends Component {
     super(props);
     this.state = {
       isOpenModal: false,
+      listDetailExpended: []
     };
   }
-
+  removeEstimatedExpense = (id) => {
+    console.log(id);
+  }
   async componentDidMount() { }
-  componentDidUpdate(prevProps, prevState, snapshot) { }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.listDetailExpended !== this.props.listDetailExpended) {
+      let listEstimatedExpenseShow = [];
+      this.props.listDetailExpended.forEach((item, index) => {
+        listEstimatedExpenseShow.push({
+          id: index,
+          invoiceNo: item.invoiceNo,
+          detailExpenses: item.expenseDetail,
+          supplier: item.supplier,
+          invoiceDate: item.invoiceDate,
+          fundingSource: item.fundingCode,
+          projectCode: item.projectCode,
+          donor: item.donorBudget,
+          amount: item.amount,
+        });
+      });
+      this.setState({
+        listEstimatedExpenseShow: [...listEstimatedExpenseShow]
+      });
+    }
+  }
   onChangeInput = (event, id) => {
     let copyState = { ...this.state };
     copyState[id] = event.target.value;
@@ -83,7 +100,7 @@ class DetailExpense extends Component {
     });
   };
   handleAddNewExpenseDetail = (data) => {
-    console.log(data);
+    this.props.createEstimatedExpenseAction(data);
   }
   toogleUserModal = () => {
     this.setState({
@@ -91,6 +108,7 @@ class DetailExpense extends Component {
     });
   };
   render() {
+    let { listEstimatedExpenseShow } = this.state;
     return (
       <>
         <div className="head">
@@ -98,7 +116,7 @@ class DetailExpense extends Component {
           <button className="primary-button" onClick={this.handleAddNewExpense}>+ Add new</button>
         </div>
         <div className="result">
-          <DataTable columns={columns} data={data} pagination />
+          <DataTable columns={columns} data={listEstimatedExpenseShow} pagination />
         </div>
         <ModalExpense
           isOpen={this.state.isOpenModal}
@@ -111,11 +129,13 @@ class DetailExpense extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    listDetailExpended: state.admin.listEstimatedExpense
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { createEstimatedExpenseAction: (data) => dispatch(createEstimatedExpenseAction(data)) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailExpense);

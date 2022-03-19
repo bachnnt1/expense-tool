@@ -1,10 +1,12 @@
-.result-create {
+.create-boundary {
+  background: #f0f2f5;
+  max-height: calc(100vh - 5rem);
   overflow: auto;
-  max-height: 100%;
+}
+.result-create {    
   background-color: white;
   margin-top: 10px;
-  padding: 1em 2em;
-  height: 51rem;
+  padding: 1em 2em;  
 }
 label {
   font-weight: 600;

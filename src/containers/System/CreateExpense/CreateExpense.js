@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./CreateExpense.scss";
 import DetailExpense from "../ExpenseDetail/DetailExpense";
-import ModalExpense from "../ExpenseDetail/ModalExpense";
+import "./CreateExpense.scss";
+
+import {
+  createExpenseClaimAction, getListExpenseClaimAction
+} from "../../../store/actions/adminActions";
 class CreateExpense extends Component {
   constructor(props) {
     super(props);
@@ -38,11 +41,19 @@ class CreateExpense extends Component {
       selectedFile: null,
       isDisplayPaymentMethod: false,
       isDisplayAmount: false,
+      selectedName: "",
+      listExpenseClaim: []
     };
   }
 
   async componentDidMount() { }
-  componentDidUpdate(prevProps, prevState, snapshot) { }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.listExpenseClaim !== this.props.listExpenseClaim) {
+      this.setState({
+        listExpenseClaim: this.props.listExpenseClaim
+      });
+    }
+  }
   onChangeInput = (event, id) => {
     let copyState = { ...this.state };
     copyState[id] = event.target.value;
@@ -68,6 +79,45 @@ class CreateExpense extends Component {
   onChangeRadioButton = (event) => {
     this.setState({ paymentMethod: event.target.value });
   }
+  onChangeOrganization = (event) => {
+    this.setState({ selectedOrganization: event.target.value });
+  }
+  handleNewExpenseClaim = () => {
+    const newExpenseClaim = {
+      name: this.state.selectedName,
+      date: this.state.currentDate,
+      claimant: this.state.selectedClaimant,
+      department: this.state.selectedDepartment,
+      organization: this.state.selectedOrganization,
+      type: this.state.selectedCategory,
+      amountClaimed: this.state.claimAmount,
+      status: 'Inprogress'
+    };
+    this.props.createExpenseClaimAction(newExpenseClaim);
+    //  reset all
+    this.setState({
+      currentDate: "",
+      selectedCategory: "Expense claim",
+      selectedClaimant: "",
+      selectedDepartment: "",
+      selectedAdvandeReq: "",
+      claimAmount: 0,
+      paymentMethod: '',
+      selectedCurrency: "VND",
+      expenseContent: "",
+      selectedPayMethod: "",
+      isTransfer: true,
+      accountNo: "",
+      bank: "",
+      amount: "",
+      selectedFile: null,
+      isDisplayPaymentMethod: false,
+      isDisplayAmount: false,
+      selectedName: ""
+    });
+    // back to list view
+    this.props.history.push("list-view");
+  }
   render() {
     let {
       selectedCategory,
@@ -90,34 +140,38 @@ class CreateExpense extends Component {
       bank,
       amount,
       isDisplayPaymentMethod,
-      paymentMethod
+      paymentMethod,
+      selectedName
     } = this.state;
     isDisplayPaymentMethod = (selectedPayMethod === 'claimant') ? false : true;
     isDisplayBankAndAccount = ((selectedPayMethod === 'aav' && paymentMethod === 'transfer') || (selectedPayMethod === 'claimant')) ? true : false;
     isDisplayAmount = (selectedPayMethod === 'aav' && paymentMethod === 'cash') ? true : false;
     return (
       <>
-        <div className="main-container container">
+        <div className="create-boundary container">
           <div className="head">
             <h3>Create Expense claim</h3>
           </div>
           <div>
             <div className="result-create">
               <label>Organization</label>
-              <div className="radio-input">
+              <div className="radio-input" onChange={this.onChangeOrganization}>
                 <div>
-                  <input id="aav" name="org" type="radio" value="aav" />
+                  <input id="aav" name="org" type="radio" value="AAV" />
                   <label htmlFor="aav">AAV</label>
                 </div>
                 <div>
-                  <input id="afv" name="org" type="radio" value="afv" />
+                  <input id="afv" name="org" type="radio" value="AFV" />
                   <label htmlFor="afv">AFV</label>
                 </div>
               </div>
               <div className="input-row">
                 <div className="input-field">
                   <label>Expense</label>
-                  <input type="text"></input>
+                  <input type="text" value={selectedName}
+                    onChange={(event) =>
+                      this.onChangeInput(event, "selectedName")
+                    }></input>
                 </div>
                 <div className="input-field">
                   <label>Category</label>
@@ -361,7 +415,7 @@ class CreateExpense extends Component {
         <div className="footer">
           <div className="button-function">
             <button type="button" className="secondary-button">Cancel</button>
-            <button type="button" className="primary-button">Create</button>
+            <button type="button" className="primary-button" onClick={this.handleNewExpenseClaim}>Create</button>
           </div>
         </div>
       </>
@@ -370,11 +424,14 @@ class CreateExpense extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return { listExpenseClaim: state.admin.listExpenseClaim };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    createExpenseClaimAction: (data) => dispatch(createExpenseClaimAction(data)),
+    getListExpenseClaimAction: () => dispatch(getListExpenseClaimAction())
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateExpense);

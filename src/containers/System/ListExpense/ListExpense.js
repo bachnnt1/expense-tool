@@ -3,7 +3,12 @@ import DataTable from "react-data-table-component";
 import { connect } from "react-redux";
 import Select from "react-select";
 import "./ListExpense.scss";
-
+import {
+  getListExpenseClaimAction,
+} from "../../../store/actions/adminActions";
+function doEdit(record) {
+  window.location.replace('http://' + window.location.hostname + ':' + '3000' + '/edit-view')
+}
 const columns = [
   {
     name: "Name",
@@ -44,136 +49,31 @@ const columns = [
     name: "Status",
     selector: (row) => row.status,
     sortable: true,
+    conditionalCellStyles: [
+      {
+        when: row => row.status = 'Inprogress',
+        classNames: ['expense-custom-class'],
+      }
+    ],
   },
   {
     name: "Actions",
     selector: (row) => row.action,
-    sortable: true,
+    cell: (record) => <button onClick={() => {
+      doEdit(record)
+    }}>Detail</button>,
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+    conditionalCellStyles: [
+      {
+        when: row => row.action = 'Inprogress',
+        classNames: ['expense-custom-class'],
+      }
+    ],
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-  {
-    id: 1,
-    name: "Beetlejuice",
-    date: "1988",
-    claimant: "a",
-    department: "d",
-    organization: "c",
-    type: "d",
-    amount: "e",
-    status: "f",
-    action: "g",
-  },
-];
 class ListExpense extends Component {
   constructor(props) {
     super(props);
@@ -187,11 +87,22 @@ class ListExpense extends Component {
       selectedDepartment: "",
       selectedType: "",
       selectedStatus: "",
+      listExpenseClaim: []
     };
   }
-
-  async componentDidMount() {}
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  componentDidMount() {
+    this.props.getListExpenseClaimAction();
+    this.setState({
+      listExpenseClaim: this.props.listExpenseClaim
+    });
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.listExpenseClaim !== this.props.listExpenseClaim) {
+      this.setState({
+        listExpenseClaim: this.props.listExpenseClaim
+      });
+    }
+  }
   handleOnChangeDate = (event) => {
     this.setState({
       currentDate: event.target.value,
@@ -212,6 +123,9 @@ class ListExpense extends Component {
   doCreateExpense = () => {
     this.props.history.push("create-expense");
   };
+  onEdit = (record) => {
+    console.log(record);
+  }
   render() {
     let {
       listOptionClaimant,
@@ -222,6 +136,7 @@ class ListExpense extends Component {
       selectedDepartment,
       selectedType,
       selectedStatus,
+      listExpenseClaim
     } = this.state;
     return (
       <>
@@ -284,7 +199,7 @@ class ListExpense extends Component {
             </div>
           </div>
           <div className="result">
-            <DataTable columns={columns} data={data} pagination />
+            <DataTable columns={columns} data={listExpenseClaim} pagination />
           </div>
         </div>
       </>
@@ -293,11 +208,11 @@ class ListExpense extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return { listExpenseClaim: state.admin.listExpenseClaim };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { getListExpenseClaimAction: () => dispatch(getListExpenseClaimAction()) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListExpense);

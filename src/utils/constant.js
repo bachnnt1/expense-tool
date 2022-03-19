@@ -2,6 +2,7 @@ export const path = {
   HOME: "/",
   CREATE_NEW_EXPENSE: "/create-expense",
   LIST_VIEW: "/list-view",
+  EDIT_VIEW: "/edit-view",
 };
 
 export const languages = {

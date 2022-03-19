@@ -15,5 +15,20 @@
 }
 .result {
   overflow: auto;
-  max-height: 100%;
+  max-height: 30rem;
+}
+.expense-custom-class div {
+  color: white;
+  border: solid 1px;
+  padding: 5px;
+  border-radius: 6px;
+  background: #2db7f5;
+}
+
+.expense-custom-class button {
+  border: none;
+  background: white;
+  color: red;
+  font-weight: 600;
+  font-size: 15px;
 }

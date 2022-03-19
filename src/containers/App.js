@@ -1,12 +1,12 @@
 import { ConnectedRouter as Router } from "connected-react-router";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
-import ConfirmModal from "../components/ConfirmModal";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { history } from "../redux";
 import { path } from "../utils";
 import CreateExpense from "./System/CreateExpense/CreateExpense";
 import ListExpense from "./System/ListExpense/ListExpense";
+import EditExpense from './System/EditExpense/EditExpense'
 
 class App extends Component {
   handlePersistorState = () => {
@@ -32,7 +32,6 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           <div className="main-container">
-            <ConfirmModal />
             <div className="content-container">
               <Switch>
                 <Route path={path.LIST_VIEW} exact component={ListExpense} />
@@ -46,6 +45,10 @@ class App extends Component {
                 <Route
                   path={path.CREATE_NEW_EXPENSE}
                   component={CreateExpense}
+                />
+                <Route
+                  path={path.EDIT_VIEW}
+                  component={EditExpense}
                 />
               </Switch>
             </div>

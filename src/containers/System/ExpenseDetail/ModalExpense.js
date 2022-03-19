@@ -238,7 +238,7 @@ class ModalExpense extends Component {
           </div>
         </ModalBody>
         <ModalFooter>
-          <div className="footer">
+          <div className="footer footer-expense">
             <div className="button-function">
               <button type="button" className="secondary-button" onClick={this.noRefCheck}>Cancel</button>
               <button type="button" className="primary-button" onClick={this.handleAddNewExpense}>Create</button>

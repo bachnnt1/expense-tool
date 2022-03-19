@@ -2,7 +2,7 @@
 .main-container {
   padding: 1em 1em;
   background: #f0f2f5;
-  height: 100vh;
+  height: 100%;
   .head {
     display: flex;
     justify-content: space-between;
@@ -98,6 +98,10 @@ option[value=""][disabled] {
       color: grey;
     }
   }
+}
+.modal-body {
+  max-height: 26rem;
+  overflow: auto;
 }
 .modal-sm {
   max-width: 45em;
