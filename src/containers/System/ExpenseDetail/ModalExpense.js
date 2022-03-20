@@ -251,7 +251,7 @@ class ModalExpense extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return { listExpenseClaim: state.admin.listExpenseClaim, };
 };
 
 const mapDispatchToProps = (dispatch) => {

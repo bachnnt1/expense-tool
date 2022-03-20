@@ -13,3 +13,9 @@ export const createExpenseClaimAction = (data) => ({
 export const getListExpenseClaimAction = () => ({
   type: actionTypes.GET_LIST_EXPENSE_CLAIM
 });
+
+
+export const getExpenseByIdAction = (id) => ({
+  type: actionTypes.GET_EXPENSE_CLAIM_BY_ID,
+  id: id
+});

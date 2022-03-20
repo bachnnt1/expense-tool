@@ -65,7 +65,12 @@ class CreateExpense extends Component {
     };
   }
 
-  async componentDidMount() { }
+  async componentDidMount() {
+    this.props.getListExpenseClaimAction();
+    this.setState({
+      listExpenseClaim: this.props.listExpenseClaim
+    });
+  }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.listExpenseClaim !== this.props.listExpenseClaim) {
       this.setState({
@@ -102,7 +107,16 @@ class CreateExpense extends Component {
     this.setState({ selectedOrganization: event.target.value });
   }
   handleNewExpenseClaim = () => {
+    let { listExpenseClaim } = this.state;
+    let id = Math.floor(Math.random() * 99999);
+    let isFound;
+    do {
+      id = Math.floor(Math.random() * 99999);
+      isFound = listExpenseClaim.filter(item => { return item.id === id });
+    } while (isFound && isFound.length > 0);
+
     const newExpenseClaim = {
+      id: id,
       name: this.state.selectedName,
       date: this.state.currentDate,
       claimant: this.state.selectedClaimant,
@@ -135,6 +149,9 @@ class CreateExpense extends Component {
       selectedName: ""
     });
     // back to list view
+    this.props.history.push("list-view");
+  }
+  doCancel = () => {
     this.props.history.push("list-view");
   }
   render() {
@@ -441,7 +458,7 @@ class CreateExpense extends Component {
         </div>
         <div className="footer">
           <div className="button-function">
-            <button type="button" className="secondary-button">Cancel</button>
+            <button type="button" className="secondary-button" onClick={this.doCancel}>Cancel</button>
             <button type="button" className="primary-button" onClick={this.handleNewExpenseClaim}>Create</button>
           </div>
         </div>

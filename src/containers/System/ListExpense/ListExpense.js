@@ -3,13 +3,15 @@ import DataTable from "react-data-table-component";
 import { connect } from "react-redux";
 import Select from "react-select";
 import "./ListExpense.scss";
-import {
-  getListExpenseClaimAction,
-} from "../../../store/actions/adminActions";
 function doEdit(record) {
-  window.location.replace('http://' + window.location.hostname + ':' + '3000' + '/edit-view')
+  window.location.replace('http://' + window.location.hostname + ':' + '3000' + '/edit-view?record=' + JSON.stringify(record));
 }
 const columns = [
+  {
+    name: "id",
+    selector: (row) => row.id,
+    show: false,
+  },
   {
     name: "Name",
     selector: (row) => row.name,
@@ -68,7 +70,7 @@ const columns = [
     conditionalCellStyles: [
       {
         when: row => row.action = 'Inprogress',
-        classNames: ['expense-custom-class'],
+        classNames: ['expense-custom-class edit-button'],
       }
     ],
   },
@@ -114,7 +116,6 @@ class ListExpense extends Component {
     };
   }
   componentDidMount() {
-    this.props.getListExpenseClaimAction();
     this.setState({
       listExpenseClaim: this.props.listExpenseClaim,
       listExpenseClaimView: this.props.listExpenseClaim,
@@ -266,11 +267,14 @@ class ListExpense extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { listExpenseClaim: state.admin.listExpenseClaim };
+  return {
+    listExpenseClaim: state.admin.listExpenseClaim,
+    listDetailExpended: state.admin.listEstimatedExpense
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return { getListExpenseClaimAction: () => dispatch(getListExpenseClaimAction()) };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListExpense);
