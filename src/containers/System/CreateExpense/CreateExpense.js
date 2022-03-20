@@ -4,7 +4,7 @@ import DetailExpense from "../ExpenseDetail/DetailExpense";
 import "./CreateExpense.scss";
 
 import {
-  createExpenseClaimAction, getListExpenseClaimAction
+  createExpenseClaimAction, getListExpenseClaimAction, resetListExpendedDetailAction
 } from "../../../store/actions/adminActions";
 class CreateExpense extends Component {
   constructor(props) {
@@ -36,7 +36,12 @@ class CreateExpense extends Component {
         label: 'Viettel', value: 'Viettel'
       }],
       selectedDepartment: "",
-      listOptionAdvance: [],
+      listOptionAdvance: [{
+        label: 'Float1', value: 'Float1'
+      },
+      {
+        label: 'Float2', value: 'Float2'
+      }],
       selectedAdvandeReq: "",
       claimAmount: 0,
       paymentMethod: '',
@@ -124,7 +129,11 @@ class CreateExpense extends Component {
       organization: this.state.selectedOrganization,
       type: this.state.selectedCategory,
       amount: this.state.claimAmount,
-      status: 'Inprogress'
+      status: 'Inprogress',
+      advantageReq: this.state.selectedAdvandeReq,
+      bank: this.state.bank,
+      accountNo: this.state.accountNo,
+      listEstimatedExpense: JSON.stringify(this.props.listEstimatedExpense)
     };
     this.props.createExpenseClaimAction(newExpenseClaim);
     //  reset all
@@ -148,6 +157,7 @@ class CreateExpense extends Component {
       isDisplayAmount: false,
       selectedName: ""
     });
+    this.props.resetListExpendedDetailAction();
     // back to list view
     this.props.history.push("list-view");
   }
@@ -468,13 +478,17 @@ class CreateExpense extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { listExpenseClaim: state.admin.listExpenseClaim };
+  return {
+    listExpenseClaim: state.admin.listExpenseClaim,
+    listEstimatedExpense: state.admin.listEstimatedExpense
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     createExpenseClaimAction: (data) => dispatch(createExpenseClaimAction(data)),
-    getListExpenseClaimAction: () => dispatch(getListExpenseClaimAction())
+    getListExpenseClaimAction: () => dispatch(getListExpenseClaimAction()),
+    resetListExpendedDetailAction: () => dispatch(resetListExpendedDetailAction())
   };
 };
 

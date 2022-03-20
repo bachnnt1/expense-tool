@@ -9,8 +9,23 @@ function doEdit(record) {
 const columns = [
   {
     name: "id",
-    selector: (row) => row.id,
-    show: false,
+    selector: (row) => row.id,    
+  },
+  {
+    name: "bank",
+    selector: (row) => row.bank,    
+  },
+  {
+    name: "accountNo",
+    selector: (row) => row.accountNo,    
+  },
+  {
+    name: "advantageReq",
+    selector: (row) => row.advantageReq,    
+  },
+  {
+    name: "listEstimatedExpense",
+    selector: (row) => row.listEstimatedExpense,    
   },
   {
     name: "Name",
@@ -257,7 +272,7 @@ class ListExpense extends Component {
               />
             </div>
           </div>
-          <div className="result">
+          <div className="result result-list">
             <DataTable columns={columns} data={listExpenseClaimView} pagination />
           </div>
         </div>

@@ -19,3 +19,7 @@ export const getExpenseByIdAction = (id) => ({
   type: actionTypes.GET_EXPENSE_CLAIM_BY_ID,
   id: id
 });
+
+export const resetListExpendedDetailAction = () => ({
+  type: actionTypes.RESET_LIST_EXPENDED_DETAIL
+});

@@ -1,12 +1,26 @@
 .edit-boundary {
+  height: 54rem;
+  .title-section {
+    font-weight: 600;
+    font-size: 16px;
+  }
   display: grid;
   grid-template-columns: 70% 30%;
+  gap: 1em;
   .left-content {
-    .info-content {
-      .div-2 {
-        display: grid;
-        grid-template-columns: 50% 50%;
-      }
+    width: 100% !important;
+    .div-2 {
+      display: grid;
+      grid-template-columns: 30% 30%;
+    }
+    .div-3 {
+      display: grid;
+      grid-template-columns: 30% 30% 30%;
     }
   }
+}
+.info-content {
+  background: white;
+  border-radius: 5px;
+  padding: 1em;
 }

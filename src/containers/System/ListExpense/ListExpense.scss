@@ -32,7 +32,13 @@
   font-weight: 600;
   font-size: 15px;
 }
-
-[data-column-id="1"] {
-  display: none !important;
+.result-list {
+  [data-column-id="1"],
+  [data-column-id="2"],
+  [data-column-id="3"],
+  [data-column-id="4"],
+  [data-column-id="5"] {
+    display: none !important;
+  }
 }
+

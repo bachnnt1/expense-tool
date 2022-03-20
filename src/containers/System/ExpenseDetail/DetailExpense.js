@@ -75,12 +75,12 @@ class DetailExpense extends Component {
         listEstimatedExpenseShow.push({
           id: index,
           invoiceNo: item.invoiceNo,
-          detailExpenses: item.expenseDetail,
+          detailExpenses: item.detailExpenses,
           supplier: item.supplier,
           invoiceDate: item.invoiceDate,
-          fundingSource: item.fundingCode,
+          fundingSource: item.fundingSource,
           projectCode: item.projectCode,
-          donor: item.donorBudget,
+          donor: item.donor,
           amount: item.amount,
         });
       });

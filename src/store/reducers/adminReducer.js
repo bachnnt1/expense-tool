@@ -21,6 +21,11 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case actionTypes.RESET_LIST_EXPENDED_DETAIL:
+      return {
+        ...state,
+        listEstimatedExpense: [],
+      };
     default:
       return state;
   }

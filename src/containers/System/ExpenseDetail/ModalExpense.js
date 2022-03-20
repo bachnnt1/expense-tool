@@ -6,7 +6,7 @@ class ModalExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expenseDetail: '',
+      detailExpenses: '',
       invoiceDate: '',
       invoiceNo: '',
       amount: '',
@@ -22,14 +22,14 @@ class ModalExpense extends Component {
         { label: "100000", value: "100000" },
         { label: "200000", value: "200000" },
       ],
-      fundingCode: '',
+      fundingSource: '',
       projectCode: '',
       listOptionProjectCode: [
         { label: "PRJ123", value: "PRJ123" },
         { label: "PRO222", value: "PRO222" },
         { label: "JAVA2", value: "JAVA2" },
       ],
-      donorBudget: '',
+      donor: '',
       listOptionDonor: [
         { label: "FPT", value: "FPT" },
         { label: "FACEBOOK", value: "FACEBOOK" },
@@ -54,15 +54,15 @@ class ModalExpense extends Component {
     this.props.handleAddNewExpense(this.state);
     this.props.toogleFromParent();
     this.setState({
-      expenseDetail: '',
+      detailExpenses: '',
       invoiceDate: '',
       invoiceNo: '',
       amount: '',
       supplier: '',
       selectedCurrency: "",
-      fundingCode: '',
+      fundingSource: '',
       projectCode: '',
-      donorBudget: '',
+      donor: '',
     });
   };
   onChangeInput = (event, id) => {
@@ -83,9 +83,9 @@ class ModalExpense extends Component {
     });
   };
   render() {
-    let { expenseDetail, invoiceNo, amount, supplier, selectedCurrency, listOptionCurrency,
-      listOptionFunding, fundingCode, projectCode, listOptionProjectCode, donorBudget, listOptionDonor } = this.state;
-    const isFundingSuccess = fundingCode ? true : false;
+    let { detailExpenses, invoiceNo, amount, supplier, selectedCurrency, listOptionCurrency,
+      listOptionFunding, fundingSource, projectCode, listOptionProjectCode, donor, listOptionDonor } = this.state;
+    const isFundingSuccess = fundingSource ? true : false;
     const isProjectSuccess = projectCode ? true : false;
     return (
       <Modal
@@ -103,8 +103,8 @@ class ModalExpense extends Component {
                 <label>Expense Detail</label>
                 <input
                   type="text"
-                  value={expenseDetail}
-                  onChange={(event) => this.onChangeInput(event, "expenseDetail")}
+                  value={detailExpenses}
+                  onChange={(event) => this.onChangeInput(event, "detailExpenses")}
                 ></input>
               </div>
             </div>
@@ -166,9 +166,9 @@ class ModalExpense extends Component {
                 <label>Funding source code</label>
                 <select
                   required
-                  value={fundingCode}
+                  value={fundingSource}
                   onChange={(event) =>
-                    this.onChangeInput(event, "fundingCode")
+                    this.onChangeInput(event, "fundingSource")
                   }
                 >
                   <option value="" disabled>
@@ -215,9 +215,9 @@ class ModalExpense extends Component {
                 <select
                   disabled={!isProjectSuccess}
                   required
-                  value={donorBudget}
+                  value={donor}
                   onChange={(event) =>
-                    this.onChangeInput(event, "donorBudget")
+                    this.onChangeInput(event, "donor")
                   }
                 >
                   <option value="" disabled>
